@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RIVER MAP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles1.css">
+</head>
+
+<body>
+
+<div id='one'>one</div>
+<div id='two'>two</div>
+<div id='three'>three</div>
+<div id='four'>four</div>
+<div id='five'>five</div>
+<div id='six'>six</div>
+<div id='seven'>seven</div>
+<div id='eight'>eight</div>
+
+<div id='one-two'></div>
+<div id='two-three'></div>
+<div id='three-four'></div>
+<div id='four-five'></div>
+<div id='five-six'></div>
+<div id='six-seven'></div>
+<div id='seven-eight'></div>
+
+<img id="fg" src="river.png">
+
+
+<script>
+
+//Set jquery to not be asynch
+$.ajaxSetup({async: false});
+
+//Import JSON data from local json file 
+var fish_dat;
+$.getJSON("fish.json", function(json) {fish_dat = json});
+
+//Set color based on fish values
+var ids = ['one','two','three','four','five','six','seven','eight'];
+var mids = ['one-two','two-three','three-four','four-five','five-six','six-seven','seven-eight'];
+
+var color;
+var col_stor = [];
+
+
+for (let i=0; i<ids.length; i++) {
+    document.getElementById(ids[i]).innerHTML = fish_dat['fish'][i];
+    
+    if (fish_dat['fish'][i] > 10000) {
+        document.getElementById(ids[i]).style.background = "rgb(" + 0 + ",0," + 255 + ")";
+        color = "rgb(250,0,25)";
+        col_stor.push(color);
+    }
+    else if (fish_dat['fish'][i] > 9500){
+        document.getElementById(ids[i]).style.background = "rgb(225,0,50)";
+        color = "rgb(225,0,50)";
+        col_stor.push(color);
+    }
+    else if (fish_dat['fish'][i] > 9000){
+        document.getElementById(ids[i]).style.background = "rgb(200,0,75)";
+        color = "rgb(200,0,75)";
+        col_stor.push(color);
+    }
+    else if (fish_dat['fish'][i] > 8500){
+        document.getElementById(ids[i]).style.background = "rgb(175,0,100)";
+        color = "rgb(175,0,100)";
+        col_stor.push(color);
+    }
+    else if (fish_dat['fish'][i] > 8000){
+        document.getElementById(ids[i]).style.background = "rgb(150,0,125)";
+        color = "rgb(150,0,125)";
+        col_stor.push(color);
+    }
+    else if (fish_dat['fish'][i] > 7500){
+        document.getElementById(ids[i]).style.background = "rgb(125,0,150)";
+        color = "rgb(125,0,150)";
+        col_stor.push(color);
+    }
+    else if (fish_dat['fish'][i] > 7000){
+        document.getElementById(ids[i]).style.background = "rgb(100,0,175)";
+        color = "rgb(100,0,175)";
+        col_stor.push(color);
+    }
+    else if (fish_dat['fish'][i] > 6500){
+        document.getElementById(ids[i]).style.background = "rgb(75,0,200)";
+        color = "rgb(75,0,200)";
+        col_stor.push(color);
+
+    }
+    else if (fish_dat['fish'][i] > 6000){
+        document.getElementById(ids[i]).style.background = "rgb(50,0,225)";
+        color = "rgb(50,0,225)";
+        col_stor.push(color);
+    }
+    else {
+        document.getElementById(ids[i]).style.background = "rgb(25,0,250)";
+        color = "rgb(25,0,250)";
+        col_stor.push(color);
+    }
+    
+}
+
+//Color blended mid sections 
+for (let i=0; i<mids.length; i++) {
+    document.getElementById(mids[i]).style.background = "linear-gradient(to right," + col_stor[i] + "," + col_stor[i+1] + ")";
+}
+
+console.log(col_stor)
+
+</script>
+
+</body>
+</html> 
