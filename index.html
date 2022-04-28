@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RIVER MAP</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -27,8 +27,14 @@
 <div id='six-seven'></div>
 <div id='seven-eight'></div>
 
-<img id="fg" src="river.png">
+<div id="cont">
+    <button id="relative" onclick="relative()">COMPARISON VIEW</button>
+    <div id="abs_exp">Each location compared to average peak run</div>
+    <button id="absolute" onclick="absolute()">PEAK RUN VIEW</button>
+    <div id="rel_exp">Each location compared to best current conditions</div>
+</div>
 
+<img id="fg" src="river2.png">
 
 <script>
 
@@ -39,77 +45,83 @@ $.ajaxSetup({async: false});
 var fish_dat;
 $.getJSON("fish.json", function(json) {fish_dat = json});
 
-//Set color based on fish values
+//create list of zone ids
 var ids = ['one','two','three','four','five','six','seven','eight'];
 var mids = ['one-two','two-three','three-four','four-five','five-six','six-seven','seven-eight'];
 
+//Initialize variables
 var color;
-var col_stor = [];
+var red;
+var blue;
+var fish_max;
 
+//Function iterate through zones and set colors based on relative scaling
 
-for (let i=0; i<ids.length; i++) {
-    document.getElementById(ids[i]).innerHTML = fish_dat['fish'][i];
-    
-    if (fish_dat['fish'][i] > 10000) {
-        document.getElementById(ids[i]).style.background = "rgb(" + 255 + ",0," + 0 + ")";
-        color = "rgb(250,0,25)";
-        col_stor.push(color);
-    }
-    else if (fish_dat['fish'][i] > 9500){
-        document.getElementById(ids[i]).style.background = "rgb(225,0,50)";
-        color = "rgb(225,0,50)";
-        col_stor.push(color);
-    }
-    else if (fish_dat['fish'][i] > 9000){
-        document.getElementById(ids[i]).style.background = "rgb(200,0,75)";
-        color = "rgb(200,0,75)";
-        col_stor.push(color);
-    }
-    else if (fish_dat['fish'][i] > 8500){
-        document.getElementById(ids[i]).style.background = "rgb(175,0,100)";
-        color = "rgb(175,0,100)";
-        col_stor.push(color);
-    }
-    else if (fish_dat['fish'][i] > 8000){
-        document.getElementById(ids[i]).style.background = "rgb(150,0,125)";
-        color = "rgb(150,0,125)";
-        col_stor.push(color);
-    }
-    else if (fish_dat['fish'][i] > 7500){
-        document.getElementById(ids[i]).style.background = "rgb(125,0,150)";
-        color = "rgb(125,0,150)";
-        col_stor.push(color);
-    }
-    else if (fish_dat['fish'][i] > 7000){
-        document.getElementById(ids[i]).style.background = "rgb(100,0,175)";
-        color = "rgb(100,0,175)";
-        col_stor.push(color);
-    }
-    else if (fish_dat['fish'][i] > 6500){
-        document.getElementById(ids[i]).style.background = "rgb(75,0,200)";
-        color = "rgb(75,0,200)";
-        col_stor.push(color);
+function relative() {
+    //Initialize function variables
+    var col_stor = [];
 
-    }
-    else if (fish_dat['fish'][i] > 6000){
-        document.getElementById(ids[i]).style.background = "rgb(50,0,225)";
-        color = "rgb(50,0,225)";
+    //Find max fish value
+    fish_max = Math.max(...fish_dat['fish']);
+
+    for (let i=0; i<ids.length; i++) {
+        
+        //Print raw fish value, hidden by image
+        document.getElementById(ids[i]).innerHTML = fish_dat['fish'][i];
+        
+        //Create zone color string
+        red = Math.round(fish_dat['fish'][i]/fish_max*255)
+        blue = 255 - red 
+        color = "rgb(" + red + ",0," + blue + ")"
+
+        //Set background
+        document.getElementById(ids[i]).style.background = color
+
+        //Store color
         col_stor.push(color);
+         
     }
-    else {
-        document.getElementById(ids[i]).style.background = "rgb(25,0,250)";
-        color = "rgb(25,0,250)";
-        col_stor.push(color);
+
+    //Set blended color in mid sections 
+    for (let i=0; i<mids.length; i++) {
+        document.getElementById(mids[i]).style.background = "linear-gradient(to right," + col_stor[i] + "," + col_stor[i+1] + ")";
     }
-    
 }
 
-//Color blended mid sections 
-for (let i=0; i<mids.length; i++) {
-    document.getElementById(mids[i]).style.background = "linear-gradient(to right," + col_stor[i] + "," + col_stor[i+1] + ")";
+//Function to iterate through zones and set colors based on absolute scaling
+
+function absolute() {
+    //Initialize function variables
+    var col_stor = [];
+
+    //Find max fish value
+    fish_max = 60000
+
+    for (let i=0; i<ids.length; i++) {
+        
+        //Print raw fish value, hidden by image
+        document.getElementById(ids[i]).innerHTML = fish_dat['fish'][i];
+        
+        //Create zone color string
+        red = Math.round(fish_dat['fish'][i]/fish_max*255)
+        blue = 255 - red 
+        color = "rgb(" + red + ",0," + blue + ")"
+
+        //Set background
+        document.getElementById(ids[i]).style.background = color
+
+        //Store color
+        col_stor.push(color);
+         
+    }
+
+    //Set blended color in mid sections 
+    for (let i=0; i<mids.length; i++) {
+        document.getElementById(mids[i]).style.background = "linear-gradient(to right," + col_stor[i] + "," + col_stor[i+1] + ")";
+    }
 }
 
-console.log(col_stor)
+absolute()
 
 </script>
 
