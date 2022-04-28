@@ -1,0 +1,230 @@
+:root {
+  --background: aqua;
+  --height: calc(100vw*100/148);
+  --width: 225px;
+  --overlap: 0px;
+  --opacity: 0.6;
+  --top: 0px;
+
+}
+
+body {
+  background: white;
+  margin: 0;
+  padding: 0;
+}
+
+#fg {
+  width: 100vw;
+}
+
+#cont {
+       top:10 px;
+       left:50px;
+       position: absolute;
+       z-index: 2;
+}
+
+#absolute {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 40px;
+  width: 105px;
+  background-color: slategrey;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#relative {
+  position: absolute;
+  top: 60px;
+  left: 10px;
+  height: 40px;
+  width: 105px;
+  background-color: slategray;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#abs_exp {
+  position: absolute;
+  top: 20px;
+  left: 125px;
+  width: 500px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#rel_exp {
+  position: absolute;
+  top: 75px;
+  left: 125px;
+  width: 500px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+
+#one {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.8);
+  height: var(--height);
+  background-color: var(--background);
+  opacity: var(--opacity);
+  left:  0px;
+  z-index: -1;
+
+}
+
+#two {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.8);
+  height: var(--height);
+  background-color: var(--background);
+  opacity: var(--opacity);
+  left:  calc(100vw/8 - var(--overlap));
+  z-index: -1;
+ 
+}
+
+#three {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.8);
+  height: var(--height);
+  background-color: var(--background);
+  opacity: var(--opacity);
+  left:  calc(100vw/8*2 - var(--overlap)*2);
+  z-index: -1;
+}
+
+#four {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.8);
+  height: var(--height);
+  background-color: var(--background);
+  opacity: var(--opacity);
+  left:  calc(100vw/8*3 - var(--overlap)*3);
+  z-index: -1;
+}
+
+#five {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.8);
+  height: var(--height);
+  background-color: var(--background);
+  opacity: var(--opacity);
+  left:  calc(100vw/8*4 - var(--overlap)*4);
+  z-index: -1;
+}
+
+#six {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.8);
+  height: var(--height);
+  background-color: var(--background);
+  opacity: var(--opacity);
+  left:  calc(100vw/8*5 - var(--overlap)*5);
+  z-index: -1;
+}
+
+#seven {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.8);
+  height: var(--height);
+  background-color: var(--background);
+  opacity: var(--opacity);
+  left:  calc(100vw/8*6 - var(--overlap)*6);
+  z-index: -1;
+}
+
+#eight {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8);
+  height: var(--height);
+  background-color: var(--background);
+  opacity: var(--opacity);
+  left:  calc(100vw/8*7 - var(--overlap)*7);
+  z-index: -1;
+}
+
+#one-two {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.2);
+  height: var(--height);
+  background: linear-gradient(to right,red,blue);
+  opacity: var(--opacity);
+  left:  calc(100vw/8*0.8);
+  z-index: -1;
+}
+
+#two-three {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.2);
+  height: var(--height);
+  background-color: aqua;
+  opacity: var(--opacity);
+  left:  calc(100vw/8*2 - 100vw/8*0.2);
+  z-index: -1;
+}
+
+#three-four {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.2);
+  height: var(--height);
+  background-color: aqua;
+  opacity: var(--opacity);
+  left:  calc(100vw/8*3 - 100vw/8*0.2);
+  z-index: -1;
+}
+
+#four-five {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.2);
+  height: var(--height);
+  background-color: aqua;
+  opacity: var(--opacity);
+  left:  calc(100vw/8*4 - 100vw/8*0.2);
+  z-index: -1;
+}
+
+#five-six {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.2);
+  height: var(--height);
+  background-color: aqua;
+  opacity: var(--opacity);
+  left:  calc(100vw/8*5 - 100vw/8*0.2);
+  z-index: -1;
+}
+
+#six-seven {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.2);
+  height: var(--height);
+  background-color: aqua;
+  opacity: var(--opacity);
+  left:  calc(100vw/8*6 - 100vw/8*0.2);
+  z-index: -1;
+}
+
+#seven-eight {
+  position: absolute;
+  top: var(--top);
+  width: calc(100vw/8*0.2);
+  height: var(--height);
+  background-color: aqua;
+  opacity: var(--opacity);
+  left:  calc(100vw/8*7 - 100vw/8*0.2);
+  z-index: -1;
+}
